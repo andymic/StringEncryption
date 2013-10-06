@@ -84,7 +84,7 @@ public class StringEncryption {
 			}
 			else
 			{
-		    	System.out.print("Manual mode started, please provide a key. Ex: key=<thisismykey>\n");
+		    	System.out.print("Manual mode started, please provide a key. Ex: <thisismykey>\n");
 		    	String userKey=input.nextLine();
 				keySpec = new PBEKeySpec(userKey.toCharArray(), salt, iterationCount);
 
@@ -167,7 +167,7 @@ public class StringEncryption {
 		System.out.println("\ta) A system key will be generated for you.");
 		System.out.println("\tb) A series of automated random tests will be executed");
 		System.out.println("2)Manual");
-		System.out.println("\ta) You will be prompted for a key: ex: Key=thisismykey");
+		System.out.println("\ta) You will be prompted for a key: ex: thisismykey");
 		System.out.println("\tb) Provide  a path for scripted test cases (either relative or absolute)\n");
 		System.out.println("Which mode would you like to run? Select mode 1 or 2.");
 		mode=input.nextInt();
