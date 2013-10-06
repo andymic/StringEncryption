@@ -86,19 +86,17 @@ public class StringEncryption {
 			{
 		    	System.out.print("Manual mode started, please provide a key. Ex: key=<thisismykey>\n");
 		    	String userKey=input.nextLine();
-				String[] argsSplit=userKey.split("=");
-				String passPhrase = argsSplit[1];
-
-				keySpec = new PBEKeySpec(passPhrase.toCharArray(), salt, iterationCount);
+				keySpec = new PBEKeySpec(userKey.toCharArray(), salt, iterationCount);
 
 				// create key using PBE with MD5 and DES 
 				key = SecretKeyFactory.getInstance("PBEWithMD5AndDES").generateSecret(keySpec);
 				//  set  password-based encryption 
 				 paramSpec = new PBEParameterSpec(salt, iterationCount);
 				
-				System.out.println("Key generated successfully. Please provide the file path for scripted cases. Ex: path=<myfilepath>");
-				String path=input.nextLine();
-				
+				System.out.println("Key generated successfully. Please provide a string to be encrypted. Ex: <this is my string>");
+				String message=input.nextLine();
+				keys.add(key);
+				tests.add(message);
 			}
 
 			
@@ -111,8 +109,8 @@ public class StringEncryption {
 				//System.out.println(keys.get(i)+"==>"+tests.get(i));
 			
 			
-			ecipher = Cipher.getInstance(key.getAlgorithm());
-			dcipher = Cipher.getInstance(key.getAlgorithm());
+			ecipher = Cipher.getInstance(keys.get(i).getAlgorithm());
+			dcipher = Cipher.getInstance(keys.get(i).getAlgorithm());
 
 			// initialize the ciphers with the given keys
 
@@ -123,7 +121,7 @@ public class StringEncryption {
 
 			
 			  String encrypted = encrypt(tests.get(i));
-			  System.out.println((i+1)+".Random String:"+tests.get(i));
+			  System.out.println((i+1)+".Plain String:"+tests.get(i));
 			  System.out.println("Encrypted String: " + encrypted);
 			
 			  String decrypted = decrypt(encrypted);
